@@ -1,3 +1,5 @@
+import uuid
+
 from fastapi.testclient import TestClient
 
 from aaaradius.db import init_db, seed_demo_data
@@ -40,7 +42,7 @@ def test_auth_reject_bad_password() -> None:
 
 
 def test_create_user_via_form() -> None:
-    username = "alice-e2e"
+    username = f"user-{uuid.uuid4().hex[:8]}"
     response = client.post(
         "/users",
         data={"username": username, "password": "secret"},

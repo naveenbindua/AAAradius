@@ -1,9 +1,6 @@
 {
   "name": "AAAradius",
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
-  },
+  "snapshot": "snapshot-20260918-2a0bf21c-abc7-4bbb-a752-1e984c00915a",
   "user": "ubuntu",
   "install": "bash .cursor/scripts/install.sh",
   "start": "bash .cursor/scripts/start.sh",

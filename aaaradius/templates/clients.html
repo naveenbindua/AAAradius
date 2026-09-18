@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}NAS Clients · AAAradiusPanel{% endblock %}
+{% block content %}
+<h1>NAS Clients</h1>
+<div class="card">
+  <form method="post" action="/clients">
+    <input name="name" placeholder="Client name" required />
+    <input name="ip_address" placeholder="IP address" required />
+    <input name="secret" type="password" placeholder="Shared secret" required />
+    <button type="submit">Add client</button>
+  </form>
+</div>
+<div class="card">
+  <table>
+    <thead>
+      <tr><th>Name</th><th>IP</th><th>Status</th><th>Created</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for client in clients %}
+      <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.ip_address }}</td>
+        <td>{{ 'Enabled' if client.enabled else 'Disabled' }}</td>
+        <td>{{ client.created_at }}</td>
+        <td>
+          <form method="post" action="/clients/{{ client.id }}/delete">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">No NAS clients yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

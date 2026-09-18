@@ -1,0 +1,23 @@
+{
+  "name": "AAAradius",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "user": "ubuntu",
+  "install": "bash .cursor/scripts/install.sh",
+  "start": "bash .cursor/scripts/start.sh",
+  "terminals": [
+    {
+      "name": "panel",
+      "command": "bash .cursor/scripts/run-panel.sh",
+      "description": "AAAradiusPanel web server on port 8080"
+    }
+  ],
+  "ports": [
+    {
+      "name": "panel",
+      "port": 8080
+    }
+  ]
+}

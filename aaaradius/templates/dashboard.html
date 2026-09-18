@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · AAAradiusPanel{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="stats">
+  <div class="card"><strong>{{ stats.users }}</strong><div>Users</div></div>
+  <div class="card"><strong>{{ stats.clients }}</strong><div>NAS Clients</div></div>
+  <div class="card"><strong class="success">{{ stats.accepts }}</strong><div>Access-Accept</div></div>
+  <div class="card"><strong class="error">{{ stats.rejects }}</strong><div>Access-Reject</div></div>
+</div>
+
+<h2>Recent authentication attempts</h2>
+<div class="card">
+  <table>
+    <thead>
+      <tr>
+        <th>Time</th>
+        <th>User</th>
+        <th>NAS</th>
+        <th>Result</th>
+        <th>Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log.created_at }}</td>
+        <td>{{ log.username }}</td>
+        <td>{{ log.nas_name }}</td>
+        <td class="{{ 'success' if log.success else 'error' }}">
+          {{ 'Access-Accept' if log.success else 'Access-Reject' }}
+        </td>
+        <td>{{ log.message }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">No authentication attempts yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

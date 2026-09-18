@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Test Auth · AAAradiusPanel{% endblock %}
+{% block content %}
+<h1>Test RADIUS Authentication</h1>
+<div class="card">
+  <form method="post" action="/test-auth">
+    <div>
+      <label>Username</label><br />
+      <select name="username" required>
+        {% for user in users %}
+        <option value="{{ user.username }}">{{ user.username }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label>Password</label><br />
+      <input name="password" type="password" required />
+    </div>
+    <div>
+      <label>NAS Client</label><br />
+      <select name="nas_name" required>
+        {% for client in clients %}
+        <option value="{{ client.name }}">{{ client.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit">Authenticate</button>
+  </form>
+</div>
+
+{% if result %}
+<div class="card">
+  <p class="{{ 'success' if result.success else 'error' }}">
+    {{ 'Access-Accept' if result.success else 'Access-Reject' }} — {{ result.message }}
+  </p>
+  <p>User <strong>{{ submitted.username }}</strong> via NAS <strong>{{ submitted.nas_name }}</strong></p>
+</div>
+{% endif %}
+{% endblock %}

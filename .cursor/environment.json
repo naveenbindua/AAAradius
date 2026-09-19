@@ -1,6 +1,6 @@
 {
   "name": "AAAradius",
-  "snapshot": "snapshot-20260918-2a0bf21c-abc7-4bbb-a752-1e984c00915a",
+  "snapshot": "snapshot-20260919-c88a1fa6-ab60-4d79-93ec-b810111568db",
   "user": "ubuntu",
   "install": "bash .cursor/scripts/install.sh",
   "start": "bash .cursor/scripts/start.sh",
